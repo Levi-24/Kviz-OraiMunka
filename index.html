@@ -4,53 +4,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <title>Rigo-Major Kviz</title>
 </head>
 <body>
     <div class="container">
-    <form id="form">
+    <form id="form" onsubmit="Szamolas(event)">
         <h1>Kvíz kérdések</h1>
         <div class="Kerdes">
-            <h3>Kerdes1</h3>
-            <label for="kerdes1">Valasz1</label>
-            <input type="radio" id="kerdes1" value="Valasz1">
+            <label class="kerdesLabel" for="KERDES1">Kerdes1</label>
             <br>
-            <label for="kerdes1">Valasz2</label>
-            <input type="radio" id="kerdes1" value="Valasz2">
+            <label for="valasz11">Valasz1</label>
+            <input type="radio" id="valasz11" value="1" name="KERDES1">
             <br>
-            <label for="kerdes1">Valasz3</label>
-            <input type="radio" id="kerdes1" value="Valasz3">
+            <label for="valasz12">Valasz2</label>
+            <input type="radio" id="valasz12" value="0" name="KERDES1">
             <br>
+            <label for="valasz13">Valasz3</label>
+            <input type="radio" id="valasz13" value="0" name="KERDES1">
         </div>
 
         <div class="Kerdes">
-            <h3>Kerdes2</h3>
-            <label for="kerdes2">Valasz1</label>
-            <input type="radio" id="kerdes2" value="Valasz1">
+            <label class="kerdesLabel" for="KERDES2">Kerdes2</label>
             <br>
-            <label for="kerdes2">Valasz2</label>
-            <input type="radio" id="kerdes2" value="Valasz2">
+            <label for="valasz21">Valasz1</label>
+            <input type="radio" id="valasz21" value="1" name="KERDES2">
             <br>
-            <label for="kerdes2">Valasz3</label>
-            <input type="radio" id="kerdes2" value="Valasz3">
+            <label for="valasz22">Valasz2</label>
+            <input type="radio" id="valasz22" value="0" name="KERDES2">
             <br>
+            <label for="valasz23">Valasz3</label>
+            <input type="radio" id="valasz23" value="0" name="KERDES2">
         </div>
 
         <div class="Kerdes">
-            <h3>Kerdes3</h3>
-            <label for="kerdes3">Valasz1</label>
-            <input type="radio" id="kerdes3" value="Valasz1">
+            <label class="kerdesLabel" for="KERDES3">Kerdes3</label>
             <br>
-            <label for="Kerdes3">Valasz2</label>
-            <input type="radio" id="kerdes3" value="Valasz2">
+            <label for="valasz31">Valasz1</label>
+            <input type="radio" id="valasz31" value="1" name="KERDES3">
             <br>
-            <label for="Kerdes3">Valasz3</label>
-            <input type="radio" id="kerdes3" value="Valasz3">
+            <label for="valasz32">Valasz2</label>
+            <input type="radio" id="valasz32" value="0" name="KERDES3">
             <br>
+            <label for="valasz33">Valasz3</label>
+            <input type="radio" id="valasz33" value="0" name="KERDES3">
         </div>
 
-        <input id="button" type="submit" value="Eredmény megtekintése">
+        <h2 id="eredmeny"></h2>
+
+        <input id="button" type="submit" name="submitGomb" value="Eredmény megtekintése">
+        <input id="button" type="button" onclick="Reset()" value="Újrakezdés">
     </form>
     </div>
+
+<script>
+function Szamolas(event){
+    event.preventDefault();
+    var pontszam = 0;
+    var valaszok = document.querySelectorAll('input[type="radio"]:checked');
+    
+    valaszok.forEach(function(valasz) {
+        pontszam += parseInt(valasz.value);
+    });
+
+    eredmeny.innerHTML = "Pontszám: " + pontszam;
+    document.getElementsByName("submitGomb")[0].disabled = true;
+    document.getElementsByName("submitGomb")[0].style.pointerEvents = "none";
+    
+}
+
+function Reset(){
+    eredmeny.innerHTML = "";
+    document.getElementsByName("submitGomb")[0].disabled = false;
+    document.getElementsByName("submitGomb")[0].style.pointerEvents = "auto";
+    document.getElementById("form").reset();
+}
+</script>
 </body>
 </html>
