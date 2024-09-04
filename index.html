@@ -7,57 +7,85 @@
     <title>Rigo-Major Kviz</title>
 </head>
 <body>
+    
     <div class="container">
     <form id="form" onsubmit="Szamolas(event)">
         <h1>Kvíz kérdések</h1>
-        <div class="Kerdes">
-            <label class="kerdesLabel" for="KERDES1">Kerdes1</label>
+        <div class="osszkeredes">
+        <div class="Kerdes1">
+            <div class="kerdes1">
+            <label class="kerdesLabel" for="KERDES1">Mikor lehet nyugdíjba menni?</label>
             <br>
-            <label for="valasz11">Valasz1</label>
-            <input type="radio" id="valasz11" value="1" name="KERDES1">
+            <label for="valasz11">44 év munkát követően, 65 éves korban</label>
+            <input type="radio" id="valasz11" value="1" name="KERDES1" onchange="ellenoriz()">
             <br>
-            <label for="valasz12">Valasz2</label>
-            <input type="radio" id="valasz12" value="0" name="KERDES1">
+            <label for="valasz12">Soha</label>
+            <input type="radio" id="valasz12" value="0" name="KERDES1" onchange="ellenoriz()">
             <br>
-            <label for="valasz13">Valasz3</label>
-            <input type="radio" id="valasz13" value="0" name="KERDES1">
+            <label for="valasz13">65 éves korban</label>
+            <input type="radio" id="valasz13" value="0" name="KERDES1" onchange="ellenoriz()">
         </div>
+        </div>
+        <br>
 
-        <div class="Kerdes">
-            <label class="kerdesLabel" for="KERDES2">Kerdes2</label>
+        <div class="Kerdes2">
+            <div class="kerdes2">
+            <label class="kerdesLabel" for="KERDES2">Mikor halt meg Michael Jackson?</label>
             <br>
-            <label for="valasz21">Valasz1</label>
-            <input type="radio" id="valasz21" value="1" name="KERDES2">
+            <label for="valasz21">2007</label>
+            <input type="radio" id="valasz21" value="1" name="KERDES2" onchange="ellenoriz()">
             <br>
-            <label for="valasz22">Valasz2</label>
-            <input type="radio" id="valasz22" value="0" name="KERDES2">
+            <label for="valasz22">2000</label>
+            <input type="radio" id="valasz22" value="0" name="KERDES2" onchange="ellenoriz()">
             <br>
-            <label for="valasz23">Valasz3</label>
-            <input type="radio" id="valasz23" value="0" name="KERDES2">
+            <label for="valasz23">2009</label>
+            <input type="radio" id="valasz23" value="0" name="KERDES2" onchange="ellenoriz()">
         </div>
-
-        <div class="Kerdes">
-            <label class="kerdesLabel" for="KERDES3">Kerdes3</label>
-            <br>
-            <label for="valasz31">Valasz1</label>
-            <input type="radio" id="valasz31" value="1" name="KERDES3">
-            <br>
-            <label for="valasz32">Valasz2</label>
-            <input type="radio" id="valasz32" value="0" name="KERDES3">
-            <br>
-            <label for="valasz33">Valasz3</label>
-            <input type="radio" id="valasz33" value="0" name="KERDES3">
         </div>
+        <br>
+        <div class="Kerdes3">
+            <div class="kerdes3">
+            <label class="kerdesLabel" for="KERDES3">Ki volt Rákosi Mátyás?</label>
+            <br>
+            <label for="valasz31">Énekes</label>
+            <input type="radio" id="valasz31" value="1" name="KERDES3" onchange="ellenoriz()">
+            <br>
+            <label for="valasz32">Magyar Politikus</label>
+            <input type="radio" id="valasz32" value="0" name="KERDES3" onchange="ellenoriz()">
+            <br>
+            <label for="valasz33">Lovas Huszár</label>
+            <input type="radio" id="valasz33" value="0" name="KERDES3" onchange="ellenoriz()">
+            </div>
+        </div>
+    </div>
 
         <h2 id="eredmeny"></h2>
 
-        <input id="button" type="submit" name="submitGomb" value="Eredmény megtekintése">
-        <input id="button" type="button" onclick="Reset()" value="Újrakezdés">
+        <input id="submitGomb" type="submit" name="submitGomb" value="Eredmény megtekintése" disabled>
+        <input id="resetButton" type="button" onclick="Reset()" value="Újrakezdés">
     </form>
     </div>
 
 <script>
+   function ellenoriz() {
+    var kerdesek = ["KERDES1", "KERDES2", "KERDES3"];
+    var mindenValaszolt = true;
+
+    kerdesek.forEach(function(kerdes) {
+        var valaszok = document.getElementsByName(kerdes);
+        var valaszolva = Array.from(valaszok).some(valasz => valasz.checked);
+        if (!valaszolva) {
+            mindenValaszolt = false;
+        }
+    });
+    document.getElementById("submitGomb").disabled = !mindenValaszolt;
+}
+
+
+
+
 function Szamolas(event){
+
     event.preventDefault();
     var pontszam = 0;
     var valaszok = document.querySelectorAll('input[type="radio"]:checked');
@@ -68,9 +96,18 @@ function Szamolas(event){
 
     eredmeny.innerHTML = "Pontszám: " + pontszam;
     document.getElementsByName("submitGomb")[0].disabled = true;
+    
     document.getElementsByName("submitGomb")[0].style.pointerEvents = "none";
     
 }
+
+
+
+
+
+
+
+
 
 function Reset(){
     eredmeny.innerHTML = "";
