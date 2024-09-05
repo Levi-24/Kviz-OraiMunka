@@ -10,7 +10,7 @@
 <div class="container"> <!-- Main container for the quiz form -->
     <!-- Quiz form that triggers the Szamolas(event) function on submit -->
     <form id="form" onsubmit="Szamolas(event)">
-        <h1>Quiz Questions</h1> <!-- Main title of the quiz -->
+        <h1>Kvíz kérdések</h1> <!-- Main title of the quiz -->
 
         <!-- Container for the first question -->
         <div class="osszkeredes">
@@ -115,7 +115,7 @@ function Szamolas(event){
         pontszam += parseInt(valasz.value); // Convert answer value to integer and add it to the score
     });
 
-    eredmeny.innerHTML = "Score: " + pontszam; // Display the total score
+    eredmeny.innerHTML = "Pontszám: " + pontszam; // Display the total score
     document.getElementsByName("submitGomb")[0].disabled = true; // Disable the submit button after form submission
     document.getElementsByName("submitGomb")[0].style.pointerEvents = "none"; // Prevent further interaction with the submit button 
 }
