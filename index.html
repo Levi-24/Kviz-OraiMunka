@@ -1,100 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Rigo-Major Kviz</title>
+    <meta charset="UTF-8"> <!-- Sets the character encoding to UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Ensures responsive design for mobile devices -->
+    <link rel="stylesheet" href="style.css"> <!-- Links to the external stylesheet -->
+    <title>Rigo-Major Quiz</title> <!-- The title of the webpage displayed in the browser tab -->
 </head>
 <body>
-<div class="container">
+<div class="container"> <!-- Main container for the quiz form -->
+    <!-- Quiz form that triggers the Szamolas(event) function on submit -->
     <form id="form" onsubmit="Szamolas(event)">
-        <h1>Kvíz kérdések</h1>
+        <h1>Quiz Questions</h1> <!-- Main title of the quiz -->
+
+        <!-- Container for the first question -->
         <div class="osszkeredes">
             <div class="Kerdes1">
+                <!-- First question label -->
                 <label class="kerdesLabel" for="KERDES1">Mikor lehet nyugdíjba menni?</label>
                 <br>
+                <!-- First answer option (correct) -->
                 <label id="text" for="valasz1">44 év munkát követően, 65 éves korban</label>
-                <input type="radio" id="valasz1" value="1" name="KERDES1" onchange="ellenoriz()">
+                <input type="radio" id="valasz1" value="1" name="KERDES1" onchange="ellenoriz()"> <!-- This is the correct answer -->
                 <br>
+                <!-- Second answer option (incorrect) -->
                 <label id="text" for="valasz2">Soha</label>
-                <input type="radio" id="valasz2" value="0" name="KERDES1" onchange="ellenoriz()">
+                <input type="radio" id="valasz2" value="0" name="KERDES1" onchange="ellenoriz()"> <!-- Incorrect answer -->
                 <br>
-                <label id="text" for="valasz3">65 éves korban</label>
-                <input type="radio" id="valasz3" value="0" name="KERDES1" onchange="ellenoriz()">
+                <!-- Third answer option (incorrect) -->
+                <label id="text" for="valasz3">At age 65 éves korban</label>
+                <input type="radio" id="valasz3" value="0" name="KERDES1" onchange="ellenoriz()"> <!-- Incorrect answer -->
             </div>
         <br>
+
+            <!-- Container for the second question -->
             <div class="Kerdes2">
+                <!-- Second question label -->
                 <label class="kerdesLabel" for="KERDES2">Mikor halt meg Michael Jackson?</label>
                 <br>
+                <!-- First answer option (incorrect) -->
                 <label id="text" for="valasz4">2007</label>
-                <input type="radio" id="valasz4" value="0" name="KERDES2" onchange="ellenoriz()">
+                <input type="radio" id="valasz4" value="0" name="KERDES2" onchange="ellenoriz()"> <!-- Incorrect answer -->
                 <br>
+                <!-- Second answer option (incorrect) -->
                 <label id="text" for="valasz5">2000</label>
-                <input type="radio" id="valasz5" value="0" name="KERDES2" onchange="ellenoriz()">
+                <input type="radio" id="valasz5" value="0" name="KERDES2" onchange="ellenoriz()"> <!-- Incorrect answer -->
                 <br>
+                <!-- Third answer option (correct) -->
                 <label id="text" for="valasz6">2009</label>
-                <input type="radio" id="valasz6" value="1" name="KERDES2" onchange="ellenoriz()">
+                <input type="radio" id="valasz6" value="1" name="KERDES2" onchange="ellenoriz()"> <!-- Correct answer -->
             </div>
         <br>
+
+            <!-- Container for the third question -->
             <div class="Kerdes3">
+                <!-- Third question label -->
                 <label class="kerdesLabel" for="KERDES3">Ki volt Rákosi Mátyás?</label>
                 <br>
+                <!-- First answer option (incorrect) -->
                 <label id="text" for="valasz7">Énekes</label>
-                <input type="radio" id="valasz7" value="0" name="KERDES3" onchange="ellenoriz()">
+                <input type="radio" id="valasz7" value="0" name="KERDES3" onchange="ellenoriz()"> <!-- Incorrect answer -->
                 <br>
+                <!-- Second answer option (correct) -->
                 <label id="text" for="valasz8">Magyar Politikus</label>
-                <input type="radio" id="valasz8" value="1" name="KERDES3" onchange="ellenoriz()">
+                <input type="radio" id="valasz8" value="1" name="KERDES3" onchange="ellenoriz()"> <!-- Correct answer -->
                 <br>
+                <!-- Third answer option (incorrect) -->
                 <label id="text" for="valasz9">Lovas Huszár</label>
-                <input type="radio" id="valasz9" value="0" name="KERDES3" onchange="ellenoriz()">
+                <input type="radio" id="valasz9" value="0" name="KERDES3" onchange="ellenoriz()"> <!-- Incorrect answer -->
             </div>
         </div>
 
+        <!-- This section will display the final score after submission -->
         <h2 id="eredmeny"></h2>
 
-        <input id="submitGomb" type="submit" name="submitGomb" value="Eredmény megtekintése" disabled>
+        <!-- Submit button, initially disabled until all questions are answered -->
+        <input id="submitGomb" type="submit" name="submitGomb" value="Ellenőrzés" disabled>
+        <!-- Button to reset the quiz and start over -->
         <input id="resetButton" type="button" onclick="Reset()" value="Újrakezdés">
     </form>
 </div>
 
 <script>
+/* Function to check if all questions have been answered */
 function ellenoriz() {
-    var kerdesek = ["KERDES1", "KERDES2", "KERDES3"];
-    var mindenValaszolt = true;
+    var kerdesek = ["KERDES1", "KERDES2", "KERDES3"]; // Array of question names
+    var mindenValaszolt = true; // Boolean variable to check if all questions are answered
 
+    // Loop through each question to verify if an answer is selected
     kerdesek.forEach(function(kerdes) {
-        var valaszok = document.getElementsByName(kerdes);
-        var valaszolva = Array.from(valaszok).some(valasz => valasz.checked);
+        var valaszok = document.getElementsByName(kerdes); // Get all answer options for the question
+        var valaszolva = Array.from(valaszok).some(valasz => valasz.checked); // Check if any radio button is checked
         if (!valaszolva) {
-            mindenValaszolt = false;
+            mindenValaszolt = false; // If no option is selected for a question, set this to false
         }
     });
+    // Enable or disable the submit button based on whether all questions are answered
     document.getElementById("submitGomb").disabled = !mindenValaszolt;
 }
 
+/* Function to calculate the score after the form is submitted */
 function Szamolas(event){
 
-    event.preventDefault();
-    var pontszam = 0;
-    var valaszok = document.querySelectorAll('input[type="radio"]:checked');
+    event.preventDefault(); // Prevents the form from refreshing the page
+    var pontszam = 0; // Variable to store the score
+    var valaszok = document.querySelectorAll('input[type="radio"]:checked'); // Get all selected radio buttons
     
+    // Loop through selected answers and add up the score
     valaszok.forEach(function(valasz) {
-        pontszam += parseInt(valasz.value);
+        pontszam += parseInt(valasz.value); // Convert answer value to integer and add it to the score
     });
 
-    eredmeny.innerHTML = "Pontszám: " + pontszam;
-    document.getElementsByName("submitGomb")[0].disabled = true;
-    
-    document.getElementsByName("submitGomb")[0].style.pointerEvents = "none"; 
+    eredmeny.innerHTML = "Score: " + pontszam; // Display the total score
+    document.getElementsByName("submitGomb")[0].disabled = true; // Disable the submit button after form submission
+    document.getElementsByName("submitGomb")[0].style.pointerEvents = "none"; // Prevent further interaction with the submit button 
 }
 
+/* Function to reset the quiz */
 function Reset(){
-    eredmeny.innerHTML = "";
-    document.getElementsByName("submitGomb")[0].disabled = false;
-    document.getElementsByName("submitGomb")[0].style.pointerEvents = "auto";
-    document.getElementById("submitGomb").disabled = true;
-    document.getElementById("form").reset();
+    eredmeny.innerHTML = ""; // Clear the displayed score
+    document.getElementsByName("submitGomb")[0].disabled = false; // Enable the submit button
+    document.getElementsByName("submitGomb")[0].style.pointerEvents = "auto"; // Allow interaction with the submit button
+    document.getElementById("submitGomb").disabled = true; // Disable the submit button until questions are answered
+    document.getElementById("form").reset(); // Reset the form to clear all answers
 }
 </script>
 </body>
