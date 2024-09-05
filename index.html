@@ -81,9 +81,6 @@
     document.getElementById("submitGomb").disabled = !mindenValaszolt;
 }
 
-
-
-
 function Szamolas(event){
 
     event.preventDefault();
@@ -97,19 +94,8 @@ function Szamolas(event){
     eredmeny.innerHTML = "Pontszám: " + pontszam;
     document.getElementsByName("submitGomb")[0].disabled = true;
     
-    document.getElementsByName("submitGomb")[0].style.pointerEvents = "none";
-
-    
-    
+    document.getElementsByName("submitGomb")[0].style.pointerEvents = "none"; 
 }
-
-
-
-
-
-
-
-
 
 function Reset(){
     eredmeny.innerHTML = "";
