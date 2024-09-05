@@ -81,6 +81,7 @@
 </div>
 
 <script>
+document.getElementsByName("submitGomb")[0].style.pointerEvents = "none";
 /* Function to check if all questions have been answered */
 function ellenoriz() {
     var kerdesek = ["KERDES1", "KERDES2", "KERDES3"]; // Array of question names
@@ -95,7 +96,11 @@ function ellenoriz() {
         }
     });
     // Enable or disable the submit button based on whether all questions are answered
-    document.getElementById("submitGomb").disabled = !mindenValaszolt;
+    if (mindenValaszolt) {
+        document.getElementById("submitGomb").disabled = false;
+        document.getElementsByName("submitGomb")[0].style.pointerEvents = "auto";
+    }
+
 }
 
 /* Function to calculate the score after the form is submitted */
@@ -119,7 +124,6 @@ function Szamolas(event){
 function Reset(){
     eredmeny.innerHTML = ""; // Clear the displayed score
     document.getElementsByName("submitGomb")[0].disabled = false; // Enable the submit button
-    document.getElementsByName("submitGomb")[0].style.pointerEvents = "auto"; // Allow interaction with the submit button
     document.getElementById("submitGomb").disabled = true; // Disable the submit button until questions are answered
     document.getElementById("form").reset(); // Reset the form to clear all answers
 }
