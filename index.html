@@ -67,7 +67,7 @@
     </div>
 
 <script>
-   function ellenoriz() {
+function ellenoriz() {
     var kerdesek = ["KERDES1", "KERDES2", "KERDES3"];
     var mindenValaszolt = true;
 
@@ -101,6 +101,7 @@ function Reset(){
     eredmeny.innerHTML = "";
     document.getElementsByName("submitGomb")[0].disabled = false;
     document.getElementsByName("submitGomb")[0].style.pointerEvents = "auto";
+    document.getElementById("submitGomb").disabled = true;
     document.getElementById("form").reset();
 }
 </script>
